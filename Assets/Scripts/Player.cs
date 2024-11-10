@@ -18,15 +18,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speed = 5.0f; 
+        float runspeed = 5.0f; 
         float dt = Time.deltaTime;
-        Vector3 change = Direction * speed * dt;
+        Vector3 change = Direction * runspeed * dt;
         transform.position += change;
         //all stuff that dictates how the character moves.
 
         float Height = PlayerBox.size.y; //for the croutch 
-
-       if (Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.LeftControl)) //Crouch. DOESNT WORK!!!!!!
+                                         //if (Input.GetKeyDown(KeyCode.RightControl) || Input.GetKeyDown(KeyCode.LeftControl)) //Crouch. DOESNT WORK!!!!!!
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.R)) //Crouch. DOESNT WORK!!!!!!
        {
             Height = Height/2;
             Debug.Log(PlayerBox.size.y);
