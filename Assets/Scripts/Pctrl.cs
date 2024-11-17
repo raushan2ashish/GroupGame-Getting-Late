@@ -35,25 +35,25 @@ public class Pctrl : MonoBehaviour
         //Player AutoRun to right 
         AutoRun();
 
-        //Crouch when Q is pressed for 2 seconds
+        //Crouch when Left ctrl is pressed for 2 seconds
         
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             Crouch();
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
             
         }
 
-        //Jump when W is pressed
-        if (Input.GetKeyDown(KeyCode.W) && isOnGround)
+        //Jump when Space is pressed
+        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             Jump();
             canDoubleJump = true;
             isOnGround=false;
         }
 
-        // Double jump when E is pressed
-        if ((Input.GetKeyDown(KeyCode.E)) && !isOnGround && canDoubleJump)
+        // Double jump when V is pressed
+        if ((Input.GetKeyDown(KeyCode.V)) && !isOnGround && canDoubleJump)
         {
             Jump();
             canDoubleJump = false;
