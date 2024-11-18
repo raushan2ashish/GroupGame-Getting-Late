@@ -56,7 +56,7 @@ public class Pctrl : MonoBehaviour
         // Double jump when V is pressed
         else if ((Input.GetKeyDown(KeyCode.Space)) && !isOnGround && canDoubleJump)
         {
-            Jump();
+            DoubleJump();
             canDoubleJump = false;
             //runAnimation.SetInteger("moveControl", 2);
         }
@@ -94,6 +94,10 @@ public class Pctrl : MonoBehaviour
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         
+    }
+    void DoubleJump()
+    {
+        rb.AddForce(Vector2.up * jumpForce/2, ForceMode2D.Impulse);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
