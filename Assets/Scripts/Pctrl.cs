@@ -16,25 +16,25 @@ public class Pctrl : MonoBehaviour
     private bool isOnGround;
 
     //public Animator runAnimation;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-       rb = GetComponent<Rigidbody2D>();
-       capsuleCollider = GetComponent<CapsuleCollider2D>();
-       originalColliderSize = capsuleCollider.size;
+        rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        originalColliderSize = capsuleCollider.size;
         isOnGround = true;
         startingPosition = transform.position;
-        
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
-          //Crouch when Left ctrl is pressed for 2 seconds
-        
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        //Crouch when Left ctrl is pressed for 2 seconds
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
             Crouch();
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
