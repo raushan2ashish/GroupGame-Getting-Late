@@ -67,18 +67,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0337224, y: -0.55977464}
+  m_Offset: {x: 2.4032936, y: -2.3931212}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.94, y: 1.92}
+    oldSize: {x: 22.5, y: 15}
     newSize: {x: 1.94, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.108466, y: 2.1195498}
+  m_Size: {x: 8.717735, y: 2.3125334}
   m_EdgeRadius: 0
 --- !u!61 &2454421639266187111
 BoxCollider2D:
@@ -112,18 +112,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 2.259379}
+  m_Offset: {x: 2.6760864, y: 0.06243086}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.94, y: 1.92}
+    oldSize: {x: 22.5, y: 15}
     newSize: {x: 1.94, y: 1.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8, y: 6.318759}
+  m_Size: {x: 2.3476257, y: 7.238946}
   m_EdgeRadius: 0
 --- !u!212 &5208440303225211494
 SpriteRenderer:
@@ -166,7 +166,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 864894b9a890ac94290b8c9554065398, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a310849eb3f139d439597446e0aac12b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -189,5 +189,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99be5f849aa8ad40aa25e3359fd306a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greenWindow: {fileID: 21300000, guid: 864894b9a890ac94290b8c9554065398, type: 3}
-  redWindow: {fileID: 21300000, guid: ea47a5957c0b72140b82043681e5c9fc, type: 3}
+  greenWindow: {fileID: 21300000, guid: a310849eb3f139d439597446e0aac12b, type: 3}
+  redWindow: {fileID: 21300000, guid: 486359bc106c66f449e11e26b956b348, type: 3}
