@@ -15,6 +15,8 @@ public class Pctrl : MonoBehaviour
     private CapsuleCollider2D capsuleCollider;
     private Vector2 originalColliderSize;
     private bool isOnGround;
+
+    public Animator runAnimation;
     
     // Start is called before the first frame update
     void Start()
@@ -41,22 +43,27 @@ public class Pctrl : MonoBehaviour
         {
             Crouch();
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
-            
+
+            runAnimation.SetInteger("moveControl", 1);
+
         }
 
         //Jump when Space is pressed
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        else if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
             Jump();
             canDoubleJump = true;
             isOnGround=false;
+
+            runAnimation.SetInteger("moveControl", 2);
         }
 
         // Double jump when V is pressed
-        if ((Input.GetKeyDown(KeyCode.V)) && !isOnGround && canDoubleJump)
+        else if ((Input.GetKeyDown(KeyCode.V)) && !isOnGround && canDoubleJump)
         {
             Jump();
             canDoubleJump = false;
+            runAnimation.SetInteger("moveControl", 2);
         }
 
         
@@ -71,12 +78,20 @@ public class Pctrl : MonoBehaviour
         
 
     }
+    void PickAnimState()
+    {
+
+
+
+    }
     void AutoRun()
     {
         float dt = Time.deltaTime;
         Vector2 direction = Vector2.right;
         Vector3 change = direction*speed * dt;
         transform.position += change;
+
+        runAnimation.SetInteger("moveControl", 0);
 
     }
     public void Crouch() 
