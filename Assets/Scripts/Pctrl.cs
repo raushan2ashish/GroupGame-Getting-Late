@@ -49,7 +49,7 @@ public class Pctrl : MonoBehaviour
 
         //Crouch when Left ctrl is pressed for 2 seconds
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
+        if (isOnGround && Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
             Crouch();
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
@@ -67,7 +67,7 @@ public class Pctrl : MonoBehaviour
         }
 
         //Jump when Space is pressed
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
             canDoubleJump = true;
