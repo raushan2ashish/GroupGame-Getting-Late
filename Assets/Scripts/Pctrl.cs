@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pctrl : MonoBehaviour
 {
+    public Animator anim;
     public float jumpForce = 3.0f;
     public float crouchTime = 2.0f;
     public Vector3 startingPosition;
@@ -32,6 +33,18 @@ public class Pctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (isOnGround)
+        {
+            anim.SetBool("isJumping", false);
+        
+        }
+        if (!isOnGround)
+        {
+            anim.SetBool("isJumping", true);
+        
+        }
+
         //Crouch when Left ctrl is pressed for 2 seconds
 
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
@@ -40,7 +53,15 @@ public class Pctrl : MonoBehaviour
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
 
             //runAnimation.SetInteger("moveControl", 1);
-
+            
+            if (isCrouching )
+            {
+                anim.SetBool("isSliding", true);
+            }
+            else if (!isCrouching)
+            {
+                anim.SetBool("isSliding", false);
+            }
         }
 
         //Jump when Space is pressed
@@ -50,6 +71,7 @@ public class Pctrl : MonoBehaviour
             canDoubleJump = true;
             isOnGround=false;
 
+            
             //runAnimation.SetInteger("moveControl", 2);
         }
 
@@ -82,13 +104,21 @@ public class Pctrl : MonoBehaviour
     public void Crouch() 
     { 
         isCrouching = true;
-    
-        capsuleCollider.size = new Vector2(capsuleCollider.size.x, originalColliderSize.y / 2);
+        
+        anim.SetBool("isSliding", true);
+        
 
+        capsuleCollider.size = new Vector2(capsuleCollider.size.x, originalColliderSize.y / 2);
+        
     }
     void StandUp()
     {
         capsuleCollider.size = originalColliderSize;
+        anim.SetBool("isSliding", false);
+        anim.SetBool("isSliding", false);
+
+
+
     }
     void Jump()
     {
