@@ -14,6 +14,7 @@ public class Pctrl : MonoBehaviour
     public Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider;
     private Vector2 originalColliderSize;
+    private Vector2 originalColliderOffset;
     private bool isOnGround;
 
     //public Animator runAnimation;
@@ -24,6 +25,7 @@ public class Pctrl : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         originalColliderSize = capsuleCollider.size;
+        originalColliderOffset = capsuleCollider.offset;
         isOnGround = true;
         startingPosition = transform.position;
 
@@ -109,11 +111,12 @@ public class Pctrl : MonoBehaviour
         
 
         capsuleCollider.size = new Vector2(capsuleCollider.size.x, originalColliderSize.y / 2);
-        
+        capsuleCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (originalColliderSize.y / 4));
     }
     void StandUp()
     {
         capsuleCollider.size = originalColliderSize;
+        capsuleCollider.offset = originalColliderOffset;
         anim.SetBool("isSliding", false);
         anim.SetBool("isSliding", false);
 
