@@ -17,9 +17,14 @@ public class Pctrl : MonoBehaviour
     private Vector2 originalColliderOffset;
     private bool isOnGround;
 
+    AudioManager audioManager;
+
     //public Animator runAnimation;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -52,6 +57,7 @@ public class Pctrl : MonoBehaviour
         if (isOnGround && Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
             Crouch();
+            
             Invoke("StandUp", crouchTime); //Automaticallt stand up after 2 seconds
 
             //runAnimation.SetInteger("moveControl", 1);
@@ -64,7 +70,11 @@ public class Pctrl : MonoBehaviour
             {
                 anim.SetBool("isSliding", false);
             }
+
+            
         }
+
+       
 
         //Jump when Space is pressed
         if (isOnGround && Input.GetKeyDown(KeyCode.Space))
@@ -104,7 +114,8 @@ public class Pctrl : MonoBehaviour
 
     }
     public void Crouch() 
-    { 
+    {
+        audioManager.PlaySFX(audioManager.slide);
         isCrouching = true;
         
         anim.SetBool("isSliding", true);
@@ -112,6 +123,10 @@ public class Pctrl : MonoBehaviour
 
         capsuleCollider.size = new Vector2(capsuleCollider.size.x, originalColliderSize.y / 2);
         capsuleCollider.offset = new Vector2(originalColliderOffset.x, originalColliderOffset.y + (originalColliderSize.y / 4));
+        
+   
+            
+        
     }
     void StandUp()
     {
@@ -126,11 +141,13 @@ public class Pctrl : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        audioManager.PlaySFX(audioManager.jump);
         
     }
     void DoubleJump()
     {
         rb.AddForce(Vector2.up * jumpForce/2, ForceMode2D.Impulse);
+        audioManager.PlaySFX(audioManager.jump);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -141,6 +158,7 @@ public class Pctrl : MonoBehaviour
             }
         if (other.transform.CompareTag("Window"))
         {
+            audioManager.PlaySFX(audioManager.objectcollide);
             Respawn();
         }
         
