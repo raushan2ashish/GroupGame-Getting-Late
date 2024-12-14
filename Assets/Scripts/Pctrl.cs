@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pctrl : MonoBehaviour
 {
     public Animator anim;
+    public DogEnemyScript dogEnemyScrippt;
     public float jumpForce = 3.0f;
     public float crouchTime = 2.0f;
     public Vector3 startingPosition;
@@ -167,7 +168,7 @@ public class Pctrl : MonoBehaviour
     public void Respawn()
     {
         transform.position = startingPosition;
-
+        
     }
 
 }
