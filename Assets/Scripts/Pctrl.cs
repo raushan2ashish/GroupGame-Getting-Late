@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pctrl : MonoBehaviour
 {
@@ -167,8 +168,8 @@ public class Pctrl : MonoBehaviour
     }
     public void Respawn()
     {
-        transform.position = startingPosition;
-        
+        //transform.position = startingPosition;
+        SceneManager.LoadSceneAsync("Level1");
     }
 
 }
