@@ -11,7 +11,8 @@ public class Pctrl : MonoBehaviour
     public float crouchTime = 2.0f;
     public Vector3 startingPosition;
     private bool canDoubleJump = true;
-    public bool isCrouching = false;
+    private bool isCrouching = false;
+    public bool TestMap;
 
     public Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider;
@@ -168,8 +169,14 @@ public class Pctrl : MonoBehaviour
     }
     public void Respawn()
     {
-        //transform.position = startingPosition;
-        SceneManager.LoadSceneAsync("Level1");
+        if (TestMap)
+        {
+            transform.position = startingPosition;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Level1");
+        }
     }
 
 }
