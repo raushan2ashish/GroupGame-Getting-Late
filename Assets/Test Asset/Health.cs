@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("player dead");
-            //this will eventually be changed to ondestroy or the players respawn function. It doesnt do that since this is a test map.
+            Destroy(gameObject);
         }
 
         if (health > MaxHealth)
@@ -35,6 +35,10 @@ public class Health : MonoBehaviour
         }
     }
 
+    public void HealthBoost()
+    {
+        health = health + 2;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
        if (Vulnerable == true && collision.gameObject.tag == "Damager") //eventually tags will need to be added to this so the player is only damaged when hitting enemies or obstacles 

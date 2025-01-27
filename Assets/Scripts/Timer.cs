@@ -18,6 +18,17 @@ public class Timer : MonoBehaviour
     {
         timer += Time.deltaTime;
         text.text = "Time: " + timer;
+
+        if (timer < 0.0f)
+        {
+            timer = 0.0f;
+        }
     }
+
+    public void TimePowerUp()
+    {
+        timer = timer - 10.0f;
+    }
+
 
 }
