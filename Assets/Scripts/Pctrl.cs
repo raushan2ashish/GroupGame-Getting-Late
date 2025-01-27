@@ -9,9 +9,11 @@ public class Pctrl : MonoBehaviour
     public DogEnemyScript dogEnemyScrippt;
     public float jumpForce = 3.0f;
     public float crouchTime = 2.0f;
+    public int testLife = 5;
     public Vector3 startingPosition;
     private bool canDoubleJump = true;
-    public bool isCrouching = false;
+    private bool isCrouching = false;
+    public bool TestMap;
 
     public Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider;
@@ -153,23 +155,40 @@ public class Pctrl : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-            if (other.transform.CompareTag("Ground"))
-            {
-
-                isOnGround = true;
-            }
-        if (other.transform.CompareTag("Window"))
+        if (other.transform.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+        else if (other.transform.CompareTag("Window"))
         {
             audioManager.PlaySFX(audioManager.objectcollide);
             Respawn();
         }
+        else if (other.gameObject.tag == "Hostile")
+        {
+            TestLifeCounter();
+        }
         
           
     }
+    // Function accessed by the enemy or hostile object
+    // Counts the number of test lifes and prints to console
+    public void TestLifeCounter()
+    {
+        testLife -= 1;
+        Debug.Log("Life: " + testLife);
+    }
+    
     public void Respawn()
     {
-        //transform.position = startingPosition;
-        SceneManager.LoadSceneAsync("Level1");
+        if (TestMap)
+        {
+            transform.position = startingPosition;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Level1");
+        }
     }
 
 }
