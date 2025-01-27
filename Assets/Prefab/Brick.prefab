@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5218648716347216027}
   m_Layer: 0
   m_Name: Brick
-  m_TagString: Untagged
+  m_TagString: Hostile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -174,3 +174,5 @@ MonoBehaviour:
   pctrl: {fileID: 0}
   pos1: {x: 0, y: 0}
   pos2: {x: 0, y: 0}
+  waitTimePos: 0.1
+  posRepeat: 9

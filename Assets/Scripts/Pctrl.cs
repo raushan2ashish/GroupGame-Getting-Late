@@ -155,14 +155,18 @@ public class Pctrl : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-            if (other.transform.CompareTag("Ground"))
-            {
-                isOnGround = true;
-            }
-        if (other.transform.CompareTag("Window"))
+        if (other.transform.CompareTag("Ground"))
+        {
+            isOnGround = true;
+        }
+        else if (other.transform.CompareTag("Window"))
         {
             audioManager.PlaySFX(audioManager.objectcollide);
             Respawn();
+        }
+        else if (other.gameObject.tag == "Hostile")
+        {
+            TestLifeCounter();
         }
         
           
