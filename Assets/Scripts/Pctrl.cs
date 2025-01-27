@@ -9,6 +9,7 @@ public class Pctrl : MonoBehaviour
     public DogEnemyScript dogEnemyScrippt;
     public float jumpForce = 3.0f;
     public float crouchTime = 2.0f;
+    public int testLife = 5;
     public Vector3 startingPosition;
     private bool canDoubleJump = true;
     private bool isCrouching = false;
@@ -156,7 +157,6 @@ public class Pctrl : MonoBehaviour
     {
             if (other.transform.CompareTag("Ground"))
             {
-
                 isOnGround = true;
             }
         if (other.transform.CompareTag("Window"))
@@ -167,6 +167,14 @@ public class Pctrl : MonoBehaviour
         
           
     }
+    // Function accessed by the enemy or hostile object
+    // Counts the number of test lifes and prints to console
+    public void TestLifeCounter()
+    {
+        testLife -= 1;
+        Debug.Log("Life: " + testLife);
+    }
+    
     public void Respawn()
     {
         if (TestMap)
