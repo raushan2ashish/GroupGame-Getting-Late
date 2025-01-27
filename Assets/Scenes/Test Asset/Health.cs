@@ -21,7 +21,8 @@ public class Health : MonoBehaviour
         if (health <= 0)
         {
             Debug.Log("player dead");
-            Destroy(gameObject);
+            Destroy(gameObject); //eventually this will be a respawn function
+
         }
 
         if (health > MaxHealth)
