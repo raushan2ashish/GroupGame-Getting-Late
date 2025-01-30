@@ -9,6 +9,9 @@ TagManager:
   - Audio
   - Damager
   - Hostile
+  - Umbrella
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX

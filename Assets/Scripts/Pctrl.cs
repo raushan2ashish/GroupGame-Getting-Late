@@ -14,6 +14,7 @@ public class Pctrl : MonoBehaviour
     private bool canDoubleJump = true;
     private bool isCrouching = false;
     public bool TestMap;
+    public bool isShielding = false;
 
     public Rigidbody2D rb;
     private CapsuleCollider2D capsuleCollider;
@@ -107,6 +108,8 @@ public class Pctrl : MonoBehaviour
             //transform.position = startingPosition;
             Respawn();
         }
+
+        
         
         
 

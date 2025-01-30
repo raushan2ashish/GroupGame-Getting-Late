@@ -6,6 +6,7 @@ using UnityEngine;
 public class DamagingObject : MonoBehaviour
 {
     public Pctrl pctrl;
+    [SerializeField] public GameObject player;
     public Vector2 pos1;
     public Vector2 pos2;
     public float waitTimePos = 0.1f;
@@ -39,6 +40,14 @@ public class DamagingObject : MonoBehaviour
             pctrl.TestLifeCounter();
             Destroy(gameObject);
         }
+        else if(other.gameObject.tag == "Umbrella")
+        {
+            Destroy(gameObject);
+        }
     }
+    //public void SelfDestruct()
+    //{
+    //    Destroy(gameObject);
+    //}
 
 }

@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnerBrick : MonoBehaviour
+public class SpawnerSlime : MonoBehaviour
 {
     [SerializeField] public float waitTime = 5.0f;
     [SerializeField] public float timerTime = 5.0f;
-    [SerializeField] public GameObject brickPrefab;
+    [SerializeField] public GameObject slime;
     public bool isSpawning;
-     
-    
     
     public void Start() 
     {
@@ -34,7 +32,7 @@ public class SpawnerBrick : MonoBehaviour
     //Spawns the selected prefab and reinitiates the spawner
     public void ObjectSpawner()
     {
-        Instantiate(brickPrefab, transform.position, Quaternion.identity);
+        Instantiate(slime, transform.position, Quaternion.identity);
         isSpawning = false;
     }
 }
