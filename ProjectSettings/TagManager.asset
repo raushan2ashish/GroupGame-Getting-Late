@@ -9,6 +9,7 @@ TagManager:
   - Audio
   - Damager
   - Hostile
+  - Ladder
   layers:
   - Default
   - TransparentFX
