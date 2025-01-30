@@ -1088,6 +1088,7 @@ GameObject:
   - component: {fileID: 601828164}
   - component: {fileID: 601828166}
   - component: {fileID: 601828167}
+  - component: {fileID: 601828168}
   m_Layer: 0
   m_Name: harry
   m_TagString: GameController
@@ -1265,6 +1266,20 @@ MonoBehaviour:
   FollowSpeed: 1
   yoffset: 1
   target: {fileID: 0}
+--- !u!114 &601828168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601828155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7421b6b69af42684ca0afdd127017624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  MaxHealth: 20
 --- !u!1001 &615552566
 PrefabInstance:
   m_ObjectHideFlags: 0
