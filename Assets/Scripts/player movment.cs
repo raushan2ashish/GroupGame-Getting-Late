@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.001f)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            //transform.position += Vector3.up * jumpHeight;
         }
 
         // Horizontal movement
