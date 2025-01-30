@@ -12,6 +12,7 @@ TagManager:
   - Umbrella
   - Enemy
   - Weapon
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
