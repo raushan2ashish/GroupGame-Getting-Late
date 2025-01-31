@@ -167,7 +167,7 @@ public class Pctrl : MonoBehaviour
             audioManager.PlaySFX(audioManager.objectcollide);
             Respawn();
         }
-        else if (other.gameObject.tag == "Hostile")
+        else if (other.gameObject.tag == "Hostile" || other.gameObject.tag == "Enenmy")
         {
             TestLifeCounter();
         }
