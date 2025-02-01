@@ -55,7 +55,7 @@ public class PlayerGlide1 : MonoBehaviour
     {
         float fallDistance = lastGroundedY - transform.position.y; // Calculate fall distance
 
-        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y < 0)
+        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y < 0 && transform.position.y > 2.0)// for changing Glide Button go to Input manager in settings
         {
             rb.AddForce(Vector2.up * glideForce, ForceMode2D.Force); // Apply upward force to slow fall
             anim.SetBool("isGliding", true);

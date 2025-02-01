@@ -17,12 +17,12 @@ public class PlayerShield1 : MonoBehaviour
     void Update()
     {
         // Enable the shield while the button is held down
-        if (Input.GetButton(shieldButton))
+        if (Input.GetButtonDown(shieldButton))
         {
             shieldUmbrella.SetActive(true);
             anim.SetBool("isShielding", true);
         }
-        else
+        else if (Input.GetButtonUp(shieldButton))
         {
             shieldUmbrella.SetActive(false);
             anim.SetBool("isShielding", false);

@@ -39,15 +39,17 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             //transform.position += Vector3.up * jumpHeight;
-               
+
         }
-        if (Mathf.Abs(rb.velocity.y) > 0.001f)
+
+        //Jump Animation when character Verticle Speed is more than 0
+        if (Mathf.Abs(rb.velocity.y) > 0.001f && isShielding == false)
         {
-            anim.SetBool("isJumping", true);
+            anim.SetBool("isJumping", true);//Jump Animation Enabled
         }
-        else if(Mathf.Abs(rb.velocity.y) < 0.001f)
+        else if(Mathf.Abs(rb.velocity.y) < 0.001f && isShielding == false)
         {
-            anim.SetBool("isJumping", false);
+            anim.SetBool("isJumping", false);//Jump Animation Desabled
         }
             
 
@@ -85,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
             float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * (moveSpeed * openUmbHoriModifier), openUmbrellaModifier);
             
-
+       
         }
         else if(onLadder == true && Input.GetKey(KeyCode.LeftAlt))
         {
@@ -124,6 +126,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isShielding = !isShielding;
             umbrella.ShieldSwitch();
+            
         }
 
         //Auto close umbrella when on ladder
