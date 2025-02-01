@@ -7,18 +7,26 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float moveSpeed = 5f; // Default move speed
     [SerializeField] public float jumpHeight = 5f; // Default jump height
     [SerializeField] public float climbSpeed = 5.5f;
+    [SerializeField] public float openUmbrellaModifier = -1.0f;
     [SerializeField] public Rigidbody2D rb;
+    public Umbrella umbrella;
     public Vector2 climbDirection;
-    public bool onLadder = false;
+    public bool onLadder;
+    public bool isShielding;
+    public float rigidBodyVelocityY;
+    
 
 
-    void Start()
+    public void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Cache the Rigidbody2D component
         climbDirection = new Vector2(0, -1);
+        onLadder = false;
+        isShielding = false;
+        rigidBodyVelocityY = rb.velocity.y;
     }
 
-    void Update()
+    public void Update()
     {
         // Jumping
         if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.001f && onLadder == false)
@@ -29,7 +37,20 @@ public class PlayerMovement : MonoBehaviour
 
         // Horizontal movement 
         //Climbing ladder and locking movement in horizontal axes
-        if(onLadder == false)
+        //Gliding mid-air
+        if(onLadder == false && isShielding == false)
+        {
+            rb.gravityScale = 1;
+            float moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        }
+        else if(onLadder == false && isShielding == true && rb.velocity.y <= -1.0f)
+        {
+            rb.gravityScale = 1;
+            float moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * moveSpeed, openUmbrellaModifier);
+        }
+        else if(onLadder == false && isShielding == true)
         {
             rb.gravityScale = 1;
             float moveInput = Input.GetAxis("Horizontal");
@@ -37,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(onLadder == true && Input.GetKey(KeyCode.LeftAlt))
         {
-            onLadder = !onLadder;  
+            onLadder = !onLadder;
         }
 
         if(Input.GetKeyDown(KeyCode.W) && onLadder == true)
@@ -57,9 +78,24 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
         }
+
+        //Access umbrella opening and closing
+        if(Input.GetKeyDown(KeyCode.C) && onLadder == false)
+        {
+            isShielding = !isShielding;
+            umbrella.ShieldSwitch();
+        }
+
+        //Auto close umbrella when on ladder
+        if(onLadder == true && isShielding == true)
+        {
+            isShielding = !isShielding;
+            umbrella.ShieldSwitch();
+        }
         
     }
 
+    //Automatically starts or ends ladder moveset
     public void OnTriggerEnter2D(Collider2D other) 
     {
         if(other.gameObject.tag == "LadderSwitch" && onLadder == false)
@@ -78,5 +114,12 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
+    //Checks for hostile objects such as bricks
+    public void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "Hostile")
+        {
+            Debug.Log("Damaged");
+        }
+    }
 }

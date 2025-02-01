@@ -4,31 +4,19 @@ using UnityEngine;
 
 public class Umbrella : MonoBehaviour
 {
-    public bool isShielding = true;
     public Collider2D colArea;
+    public PlayerMovement player;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         colArea.GetComponent<Collider2D>();
+        colArea.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ShieldSwitch()
     {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            isShielding = !isShielding;
-            colArea.enabled = !colArea.enabled;
-            Debug.Log("Is shielding: " + isShielding);
-        }
-    }
-
-    public void OnCollisionEnter2D(Collision2D other) 
-    {
-        if(isShielding == true)
-        {
-            
-        }
+        colArea.enabled = !colArea.enabled;
     }
 }
+

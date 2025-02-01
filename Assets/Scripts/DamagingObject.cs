@@ -37,17 +37,18 @@ public class DamagingObject : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            pctrl.TestLifeCounter();
             Destroy(gameObject);
         }
-        else if(other.gameObject.tag == "Umbrella")
+    }
+
+    public void OnTriggerEnter2D(Collider2D other) 
+    {
+        if(other.gameObject.tag == "Umbrella")
         {
             Destroy(gameObject);
         }
     }
-    //public void SelfDestruct()
-    //{
-    //    Destroy(gameObject);
-    //}
+
+    
 
 }
