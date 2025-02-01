@@ -389,7 +389,7 @@ MonoBehaviour:
   rightDoorPivot: {fileID: 5190189960554843237}
   openAngle: 90
   openSpeed: 13.56
-  waitTime: 1.7
+  waitTime: 2.5
 --- !u!1 &8772801585279492038
 GameObject:
   m_ObjectHideFlags: 0

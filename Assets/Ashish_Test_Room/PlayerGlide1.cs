@@ -9,7 +9,7 @@ public class PlayerGlide1 : MonoBehaviour
 
     [Header("Glide Settings")]
     public string glideButton = "Glide"; // Assign a different button for Glide
-    public float glideForce = 5f; // Adjust to control glide strength
+    public float glideForce = 1f; // Adjust to control glide strength
     public float minGlideHeight = 3f; // Minimum fall distance before gliding is allowed
 
     private float lastGroundedY; // Stores the last grounded Y position
@@ -32,6 +32,10 @@ public class PlayerGlide1 : MonoBehaviour
     {
         CheckGroundStatus();
         HandleGlide();
+
+
+
+       
     }
 
     private void CheckGroundStatus()
@@ -44,6 +48,19 @@ public class PlayerGlide1 : MonoBehaviour
             canGlide = true; // Reset glide ability when touching the ground
             jumpedFromGround = false; // Reset jump tracking when grounded
         }
+
+
+
+
+        if (isGrounded == true)
+        {
+            anim.SetBool("isOnGround", true);
+
+        }
+        else if (!isGrounded)
+        {
+            anim.SetBool("isOnGround", false);
+        }
     }
 
     public void NotifyJumpedFromGround()
@@ -55,20 +72,26 @@ public class PlayerGlide1 : MonoBehaviour
     {
         float fallDistance = lastGroundedY - transform.position.y; // Calculate fall distance
 
-        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y < 0 && transform.position.y > 2.0)// for changing Glide Button go to Input manager in settings
+        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y <= 0 )// for changing Glide Button go to Input manager in settings
         {
             rb.AddForce(Vector2.up * glideForce, ForceMode2D.Force); // Apply upward force to slow fall
             anim.SetBool("isGliding", true);
         }
-        else
+        else if(Input.GetButtonUp(glideButton))
         {
             anim.SetBool("isGliding", false);
         }
 
+
         // Disable gliding after first activation
-       // if (anim.GetBool("isGliding"))
-       // {
-       //     canGlide = false;
-       // }
+        // if (anim.GetBool("isGliding"))
+        // {
+        //     canGlide = false;
+
+
+        // }
+
+        
     }
+
 }

@@ -42,11 +42,13 @@ public class PlayerController1 : MonoBehaviour
         }
         Jump();
         // Jumping
-       // if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-       // {
-       //     rb.velocity = Vector2.up * jumpForce;
-       //     //anim.SetTrigger("Jump");
-       // }
+        // if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     rb.velocity = Vector2.up * jumpForce;
+        //     //anim.SetTrigger("Jump");
+        // }
+
+        
     }
     private void Jump()
     {
