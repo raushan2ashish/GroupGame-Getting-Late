@@ -283,6 +283,7 @@ MonoBehaviour:
   jumpHeight: 5
   climbSpeed: 5.5
   openUmbrellaModifier: -1
+  openUmbHoriModifier: 0.5
   rb: {fileID: 477664285}
   umbrella: {fileID: 1952519018}
   climbDirection: {x: 0, y: 0}

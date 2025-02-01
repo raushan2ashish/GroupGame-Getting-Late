@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public float jumpHeight = 5f; // Default jump height
     [SerializeField] public float climbSpeed = 5.5f;
     [SerializeField] public float openUmbrellaModifier = -1.0f;
+    [SerializeField] public float openUmbHoriModifier = 0.5f;
     [SerializeField] public Rigidbody2D rb;
     public Umbrella umbrella;
     public Vector2 climbDirection;
@@ -44,17 +45,17 @@ public class PlayerMovement : MonoBehaviour
             float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
         }
+        else if(onLadder == false && isShielding == true && rb.velocity.y > -1.0f)
+        {
+            rb.gravityScale = 1;
+            float moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * (moveSpeed * openUmbHoriModifier), rb.velocity.y);
+        }
         else if(onLadder == false && isShielding == true && rb.velocity.y <= -1.0f)
         {
             rb.gravityScale = 1;
             float moveInput = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(moveInput * moveSpeed, openUmbrellaModifier);
-        }
-        else if(onLadder == false && isShielding == true)
-        {
-            rb.gravityScale = 1;
-            float moveInput = Input.GetAxis("Horizontal");
-            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+            rb.velocity = new Vector2(moveInput * (moveSpeed * openUmbHoriModifier), openUmbrellaModifier);
         }
         else if(onLadder == true && Input.GetKey(KeyCode.LeftAlt))
         {
