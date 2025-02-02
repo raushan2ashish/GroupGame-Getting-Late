@@ -96,6 +96,12 @@ public class PlayerMovement : MonoBehaviour
             
         }
 
+        // Ensure character faces right when on ladder
+        if (onLadder == true && isFacingRight == false)
+        {
+            FaceRight();
+        }
+
         if (Input.GetKeyDown(KeyCode.W) && onLadder == true)
         {
             rb.gravityScale = 0;
@@ -168,6 +174,18 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scaler = transform.localScale;
         scaler.x *= -1;
         transform.localScale = scaler;
+    }
+
+    // FaceRight method to ensure the character faces right
+    private void FaceRight()
+    {
+        if (!isFacingRight)
+        {
+            isFacingRight = true;
+            Vector3 scaler = transform.localScale;
+            scaler.x *= -1;
+            transform.localScale = scaler;
+        }
     }
 
     public void Ice()
