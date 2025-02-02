@@ -6,15 +6,19 @@ public class AudioManager : MonoBehaviour
 {
     [Header("----------Audio Source----------")]
 
-    [SerializeField] AudioSource bgMusic;
-    [SerializeField] AudioSource sfxMusic;
+    [SerializeField] public AudioSource bgMusic;
+    [SerializeField] public AudioSource sfxMusic;
 
     [Header("----------Audio Clips----------")]
 
     public AudioClip background;
     public AudioClip jump;
-    public AudioClip slide;
     public AudioClip objectcollide;
+    public AudioClip attack;
+    public AudioClip glide;
+    public AudioClip damage;
+    
+    
 
     private void Start()
     {

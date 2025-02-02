@@ -122,7 +122,7 @@ public class Pctrl : MonoBehaviour
     }
     public void Crouch() 
     {
-        audioManager.PlaySFX(audioManager.slide);
+        //audioManager.PlaySFX(audioManager.slide);
         isCrouching = true;
         
         anim.SetBool("isSliding", true);
