@@ -47,11 +47,11 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isJumping", true);//Jump Animation Enabled
         }
-        else if (Mathf.Abs(rb.velocity.y) < 0.001f && isShielding == false)
+        else if(Mathf.Abs(rb.velocity.y) < 0.001f && isShielding == false)
         {
             anim.SetBool("isJumping", false);//Jump Animation Desabled
         }
-
+            
 
 
         // Horizontal movement 
@@ -79,30 +79,22 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 1;
             float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * (moveSpeed * openUmbHoriModifier), rb.velocity.y);
-
+            
         }
-        else if (onLadder == false && isShielding == true && rb.velocity.y <= -1.0f)
+        else if(onLadder == false && isShielding == true && rb.velocity.y <= -1.0f)
         {
             rb.gravityScale = 1;
             float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * (moveSpeed * openUmbHoriModifier), openUmbrellaModifier);
-
-
+            
+       
         }
-        else if (onLadder == true && Input.GetKey(KeyCode.LeftAlt))
+        else if(onLadder == true && Input.GetKey(KeyCode.LeftAlt))
         {
             onLadder = !onLadder;
 
-
+            
         }
-
-
-        // Ensure character faces right when on ladder
-        if (onLadder == true && isFacingRight == false)
-        {
-            FaceRight();
-        }
-
 
         if (Input.GetKeyDown(KeyCode.W) && onLadder == true)
         {
@@ -125,8 +117,8 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("isClimbing", false);//Ladder Climb Animation desable
         }
-
-
+        
+        
 
 
         //Access umbrella opening and closing
@@ -134,17 +126,15 @@ public class PlayerMovement : MonoBehaviour
         {
             isShielding = !isShielding;
             umbrella.ShieldSwitch();
-
+            
         }
 
         //Auto close umbrella when on ladder
-        if (onLadder == true && isShielding == true)
+        if(onLadder == true && isShielding == true)
         {
             isShielding = !isShielding;
             umbrella.ShieldSwitch();
-        }
-
-        
+        }   
     }
 
     //Automatically starts or ends ladder moveset
@@ -161,9 +151,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(other.gameObject.tag == "LadderBreaker" && onLadder == true)
         {
-            
             rb.velocity = new Vector2(0, 0);
-            
             transform.position = other.transform.position;
             onLadder = !onLadder;
             rb.gravityScale = 1;
@@ -174,16 +162,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
-
-    //Checks for hostile objects such as bricks
-    public void OnCollisionEnter2D(Collision2D other) 
-    {
-        if(other.gameObject.tag == "Hostile")
-        {
-            Debug.Log("Damaged");
-        }
-    }
-
     private void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -192,15 +170,19 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = scaler;
     }
 
-    // FaceRight method to ensure the character faces right
-    private void FaceRight()
+    public void Ice()
     {
-        if (!isFacingRight)
+        moveSpeed = moveSpeed + 2;
+    }
+    public void mud()
+    {
+        moveSpeed = moveSpeed -2;
+    }
+    public void normal()
+    {
+        if(moveSpeed != 5.0f)
         {
-            isFacingRight = true;
-            Vector3 scaler = transform.localScale;
-            scaler.x *= -1;
-            transform.localScale = scaler;
+            moveSpeed = 5.0f;
         }
     }
 }
