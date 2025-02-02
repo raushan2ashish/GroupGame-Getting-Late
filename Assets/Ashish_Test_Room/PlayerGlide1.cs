@@ -6,6 +6,7 @@ public class PlayerGlide1 : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
+    private AudioManager audioManager; // Reference to the AudioManager
 
     [Header("Glide Settings")]
     public string glideButton = "Glide"; // Assign a different button for Glide
@@ -15,16 +16,17 @@ public class PlayerGlide1 : MonoBehaviour
     private float lastGroundedY; // Stores the last grounded Y position
     private bool canGlide = false; // Ensures gliding activates only when conditions are met
     private bool jumpedFromGround = false; // Tracks if the player jumped from the ground
+    private bool isGliding = false; // Tracks if the player is currently gliding
 
     [Header("Ground Check")]
     public Transform groundCheck;
     public LayerMask groundLayer;
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); // Initialize AudioManager
     }
 
     // Update is called once per frame
@@ -32,10 +34,6 @@ public class PlayerGlide1 : MonoBehaviour
     {
         CheckGroundStatus();
         HandleGlide();
-
-
-
-       
     }
 
     private void CheckGroundStatus()
@@ -47,20 +45,14 @@ public class PlayerGlide1 : MonoBehaviour
             lastGroundedY = transform.position.y; // Save Y position when last on the ground
             canGlide = true; // Reset glide ability when touching the ground
             jumpedFromGround = false; // Reset jump tracking when grounded
+
+            if (isGliding) // Stop gliding and the audio when grounded
+            {
+                StopGlide();
+            }
         }
 
-
-
-
-        if (isGrounded == true)
-        {
-            anim.SetBool("isOnGround", true);
-
-        }
-        else if (!isGrounded)
-        {
-            anim.SetBool("isOnGround", false);
-        }
+        anim.SetBool("isOnGround", isGrounded);
     }
 
     public void NotifyJumpedFromGround()
@@ -72,26 +64,29 @@ public class PlayerGlide1 : MonoBehaviour
     {
         float fallDistance = lastGroundedY - transform.position.y; // Calculate fall distance
 
-        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y <= 0 )// for changing Glide Button go to Input manager in settings
+        if (canGlide && !jumpedFromGround && Input.GetButton(glideButton) && rb.velocity.y <= 0 && !isGliding)
         {
-            rb.AddForce(Vector2.up * glideForce, ForceMode2D.Force); // Apply upward force to slow fall
-            anim.SetBool("isGliding", true);
+            StartGlide();
         }
-        else if(Input.GetButtonUp(glideButton))
+        else if (Input.GetButtonUp(glideButton) && isGliding)
         {
-            anim.SetBool("isGliding", false);
+            StopGlide();
         }
-
-
-        // Disable gliding after first activation
-        // if (anim.GetBool("isGliding"))
-        // {
-        //     canGlide = false;
-
-
-        // }
-
-        
     }
 
+    private void StartGlide()
+    {
+        isGliding = true;
+        anim.SetBool("isGliding", true);
+        audioManager.sfxMusic.clip = audioManager.glide;
+        audioManager.sfxMusic.loop = true;
+        audioManager.sfxMusic.Play();
+    }
+
+    private void StopGlide()
+    {
+        isGliding = false;
+        anim.SetBool("isGliding", false);
+        audioManager.sfxMusic.Stop();
+    }
 }
