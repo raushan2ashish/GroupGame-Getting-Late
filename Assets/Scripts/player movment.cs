@@ -18,8 +18,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isFacingRight = true; //for Chacter Flip
 
     private Animator anim; //for animation
+    AudioManager audioManager;
     
-    
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     public void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Cache the Rigidbody2D component
@@ -39,13 +45,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
             //transform.position += Vector3.up * jumpHeight;
-
+            audioManager.PlaySFX(audioManager.jump);
         }
 
         //Jump Animation when character Verticle Speed is more than 0
         if (Mathf.Abs(rb.velocity.y) > 0.001f && isShielding == false)
         {
             anim.SetBool("isJumping", true);//Jump Animation Enabled
+
+            
         }
         else if(Mathf.Abs(rb.velocity.y) < 0.001f && isShielding == false)
         {
@@ -63,6 +71,9 @@ public class PlayerMovement : MonoBehaviour
             float moveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
             anim.SetFloat("Speed", Mathf.Abs(moveInput));
+            
+           
+            // Flip Character 
 
             if (isFacingRight == false && moveInput > 0 && onLadder == false)
             {
@@ -107,16 +118,19 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 0;
             rb.velocity = new Vector2(0, climbSpeed);
             anim.SetBool("isClimbing", true);//Ladder Climb Animation enable
+            
         }
         else if (Input.GetKeyUp(KeyCode.W) && onLadder == true)
         {
             rb.velocity = new Vector2(0, 0);
             anim.SetBool("isClimbing", false);//Ladder Climb Animation desable
+
         }
         else if (Input.GetKeyDown(KeyCode.S) && onLadder == true)
         {
             rb.velocity = new Vector2(0, -climbSpeed);
             anim.SetBool("isClimbing", true);//Ladder Climb Animation enable
+            
         }
         else if (Input.GetKeyUp(KeyCode.S) && onLadder == true)
         {
