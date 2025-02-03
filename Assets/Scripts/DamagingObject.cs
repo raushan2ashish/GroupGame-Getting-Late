@@ -16,7 +16,7 @@ public class DamagingObject : MonoBehaviour
     //If object reaches ground or gets stuck it is destroyed
     public IEnumerator Start() 
     {
-        pos2 = -pos1;
+        pos2 = new Vector2(-1, -1);
         for(int i = 0; i < posRepeat; i++)
         {
             pos1 = transform.position;
