@@ -39,19 +39,4 @@ public class UmbrellaAttack : MonoBehaviour
         //}
     }
 
-    public void OnTriggerEnter2D(Collider2D other) 
-    {
-        if(other.gameObject.tag == "Enemy")
-        {
-            enemy.HpCalculator();
-        }
-    }
-
-    public void AttackAreaResetter()
-    {
-        //hitTimer -= Time.deltaTime;
-        //if(hitTimer)
-        //damageArea.enabled = !damageArea.enabled;
-    }
-
 }

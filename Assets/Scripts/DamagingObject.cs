@@ -43,7 +43,7 @@ public class DamagingObject : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other) 
     {
-        if(other.gameObject.tag == "Umbrella")
+        if(other.gameObject.tag == "Umbrella" || other.gameObject.tag == "Weapon") 
         {
             Destroy(gameObject);
         }

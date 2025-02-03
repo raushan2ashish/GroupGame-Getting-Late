@@ -163,11 +163,17 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = 1;
             anim.SetBool("isOnLadder", false);
             anim.SetBool("isClimbing", false);//Ladder Climb Animation desable
-
-
-
         }
     }
+
+    public void OnCollisionEnter2D(Collision2D other) 
+    {
+        if(other.gameObject.tag == "Hostile")
+        {
+            Debug.Log("Player Took Damage");
+        }
+    }
+
     private void Flip()
     {
         isFacingRight = !isFacingRight;

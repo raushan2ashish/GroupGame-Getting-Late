@@ -15,6 +15,7 @@ TagManager:
   - Ladder
   - LadderSwitch
   - LadderBreaker
+  - EnemyTerritory
   layers:
   - Default
   - TransparentFX
