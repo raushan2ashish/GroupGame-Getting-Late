@@ -28,18 +28,22 @@ public class Moving_crane : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        // Check if the colliding object is the player
+        if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(this.transform);
+            // Parent the player to the platform
+            collision.transform.SetParent(transform);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        // Check if the colliding object is the player
+        if (collision.gameObject.CompareTag("Player"))
         {
+            // Unparent the player from the platform
             collision.transform.SetParent(null);
         }
     }

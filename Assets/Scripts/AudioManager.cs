@@ -17,6 +17,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip attack;
     public AudioClip glide;
     public AudioClip damage;
+    public AudioClip lostlife;
+    public AudioClip gameOver;
+
     
     
 

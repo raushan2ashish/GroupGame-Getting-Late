@@ -1,8 +1,16 @@
 using System.Collections;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerMovementControl : MonoBehaviour
 {
+    // Health and Lifeline UI
+    public HealthBar healthBar;
+    public LifelineManager lifelineManager;
+    public int maxHealth = 100;
+    public int currentHealth;
+    private bool isDead = false; 
+    public GameObject gameOverPanel;// Game Over Panel
+    
 
     // Movement Parameters
     public float walkSpeed = 5f;
@@ -50,15 +58,38 @@ public class PlayerMovementControl : MonoBehaviour
         originalGravityScale = rb.gravityScale;
         rb.gravityScale = gravityScale;
 
+
+
+        //Lifeline
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
+        if (lifelineManager == null)
+        {
+            lifelineManager = FindObjectOfType<LifelineManager>();
+        }
+
+        // Set initial checkpoint to the player's starting position
+        CheckpointManager.Instance.SetCheckpoint(transform.position);
+
         // Ensure you have an AudioManager in the scene and it's assigned
         if (audioManager == null)
         {
             audioManager = FindObjectOfType<AudioManager>();
         }
+
+        // Ensure Game Over Panel is initially inactive
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        if (isDead) return;
+
+
         HandleMovement();
         HandleJump();
         HandleGlide();
@@ -131,6 +162,8 @@ public class PlayerMovementControl : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             audioManager.PlaySFX(audioManager.jump);
         }
+
+
     }
 
     private void HandleGlide()
@@ -140,7 +173,7 @@ public class PlayerMovementControl : MonoBehaviour
             isGliding = true;
             rb.velocity = new Vector2(rb.velocity.x, -glideFallSpeed);
             animator.SetBool("IsGliding", true);
-            
+
         }
         else
         {
@@ -148,11 +181,11 @@ public class PlayerMovementControl : MonoBehaviour
             {
                 isGliding = false;
                 animator.SetBool("IsGliding", false);
-                
+
             }
             //isGliding = false;
-           // animator.SetBool("IsGliding", false);
-            
+            // animator.SetBool("IsGliding", false);
+
         }
     }
 
@@ -175,7 +208,7 @@ public class PlayerMovementControl : MonoBehaviour
             // Damage them
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyTest>().TakeDamage(attackDamage);
+                enemy.GetComponent<Bardwire>().TakeDamage(attackDamage);
             }
 
             // Reset attack state after a short delay
@@ -241,7 +274,7 @@ public class PlayerMovementControl : MonoBehaviour
 
     private bool IsGrounded()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, groundLayer | enemyLayer);
         foreach (Collider2D collider in colliders)
         {
             // Check if the collision is with the ground and not with vertical surfaces
@@ -316,4 +349,81 @@ public class PlayerMovementControl : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+
+
+    public void TakeDamage(int damage)
+    {
+        if (isDead) return;
+        int previousHealth = currentHealth; // Store the player's health before applying damage
+
+        currentHealth -= damage;
+
+        currentHealth = Mathf.Max(currentHealth, 0); // Ensure health doesn't go below
+
+        healthBar.SetHealth(currentHealth);
+        // Play damage sound only if the player lost health but is still alive
+        if (currentHealth < previousHealth && currentHealth > 0)
+        {
+            if (audioManager != null)
+            {
+                audioManager.PlaySFX(audioManager.damage); // Play the damage sound
+            }
+        }
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            lifelineManager.LoseLife();
+
+            
+
+            if (lifelineManager.GetCurrentLives() > 0)
+            {
+                currentHealth = maxHealth;
+                healthBar.SetMaxHealth(maxHealth);
+
+                // Play death sound when losing a lifeline
+                if (audioManager != null)
+                {
+                    audioManager.PlaySFX(audioManager.lostlife); // Play the death sound
+                }
+
+
+                RespawnAtCheckpoint();
+            }
+            else
+            {
+                isDead = true;
+                // Play game over sound when the player loses all lifelines
+                if (audioManager != null)
+                {
+                    audioManager.PlaySFX(audioManager.gameOver); // Play the game over sound
+                }
+
+
+
+                // Handle player death (e.g., game over logic)
+                Debug.Log("Game Over!");
+                // Activate the Game Over Panel
+                if (gameOverPanel != null)
+                {
+                    gameOverPanel.SetActive(true);
+                }
+
+                // Pause the game
+                Time.timeScale = 0f;
+            }
+        }
+    }
+    private void RespawnAtCheckpoint()
+    {
+        // Reset health and position
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
+        // Move player to the last checkpoint
+        transform.position = CheckpointManager.Instance.GetLastCheckpointPosition();
+        Debug.Log("Player respawned at checkpoint!");
+    }
+
 }

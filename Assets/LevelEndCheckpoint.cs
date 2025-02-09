@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Checkpoint : MonoBehaviour
+public class LevelEndCheckpoint : MonoBehaviour
 {
     public GameObject checkpointPanel; // Reference to the checkpoint UI panel
     public Text timeText; // Reference to the UI text to display the time

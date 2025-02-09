@@ -7079,9 +7079,13 @@ MonoBehaviour:
   bgMusic: {fileID: 320415431}
   sfxMusic: {fileID: 875027903}
   background: {fileID: 8300000, guid: 106e59e7bf89e446c949c85924ac0435, type: 3}
-  jump: {fileID: 0}
-  slide: {fileID: 0}
+  jump: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
   objectcollide: {fileID: 0}
+  attack: {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
+  glide: {fileID: 0}
+  damage: {fileID: 8300000, guid: 1ed8fb76fc64e4e46847348138782234, type: 3}
+  lostlife: {fileID: 8300000, guid: 5c7b6d4002009e842bd2621585546d19, type: 3}
+  gameOver: {fileID: 8300000, guid: aa967a280457c054bb646d57611f5bd0, type: 3}
 --- !u!4 &791402452
 Transform:
   m_ObjectHideFlags: 0
