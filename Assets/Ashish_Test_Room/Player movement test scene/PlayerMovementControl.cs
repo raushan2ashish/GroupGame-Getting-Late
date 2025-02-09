@@ -23,6 +23,8 @@ public class PlayerMovementControl : MonoBehaviour
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
+    private MovingPlatform currentPlatform = null;
+
 
     // Attack Parameters
     public Transform attackPoint;
@@ -152,6 +154,13 @@ public class PlayerMovementControl : MonoBehaviour
 
         Vector2 velocity = rb.velocity;
         velocity.x = moveInput * speed;
+        // Apply platform velocity if player is on moving ground
+        if (currentPlatform != null)
+        {
+            velocity.x += currentPlatform.platformVelocity.x;
+        }
+
+
         rb.velocity = velocity;
     }
 
@@ -262,6 +271,12 @@ public class PlayerMovementControl : MonoBehaviour
         {
             isClimbing = true;
         }
+
+        if (other.CompareTag("MovingPlatform"))
+        {
+            //transform.parent = other.transform; // Attach player to platform
+            currentPlatform = other.GetComponent<MovingPlatform>();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -269,6 +284,11 @@ public class PlayerMovementControl : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             isClimbing = false;
+        }
+        if (other.CompareTag("MovingPlatform"))
+        {
+            //transform.parent = null; // Detach when leaving platform
+            currentPlatform = null;
         }
     }
 

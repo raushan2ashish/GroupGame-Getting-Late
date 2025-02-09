@@ -16,6 +16,7 @@ TagManager:
   - LadderSwitch
   - LadderBreaker
   - EnemyTerritory
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
