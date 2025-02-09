@@ -14,7 +14,7 @@ public class Bardwire : MonoBehaviour
             PlayerMovementControl player = collision.gameObject.GetComponent<PlayerMovementControl>();
             if (player != null)
             {
-                player.TakeDamage(damageToPlayer);
+                //player.TakeDamage(damageToPlayer);
                 Debug.Log("Player took damage from enemy!");
             }
         }
@@ -28,7 +28,7 @@ public class Bardwire : MonoBehaviour
             PlayerMovementControl player = collision.GetComponent<PlayerMovementControl>();
             if (player != null)
             {
-                player.TakeDamage(damageToPlayer);
+               // player.TakeDamage(damageToPlayer);
                 Debug.Log("Player took damage from enemy!");
             }
         }

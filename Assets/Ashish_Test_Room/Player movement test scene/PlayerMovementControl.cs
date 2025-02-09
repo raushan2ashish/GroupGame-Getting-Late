@@ -371,79 +371,79 @@ public class PlayerMovementControl : MonoBehaviour
     }
 
 
-    public void TakeDamage(int damage)
-    {
-        if (isDead) return;
-        int previousHealth = currentHealth; // Store the player's health before applying damage
+    //public void TakeDamage(int damage)
+    //{
+    //    if (isDead) return;
+    //    int previousHealth = currentHealth; // Store the player's health before applying damage
 
-        currentHealth -= damage;
+    //    currentHealth -= damage;
 
-        currentHealth = Mathf.Max(currentHealth, 0); // Ensure health doesn't go below
+    //    currentHealth = Mathf.Max(currentHealth, 0); // Ensure health doesn't go below
 
-        healthBar.SetHealth(currentHealth);
-        // Play damage sound only if the player lost health but is still alive
-        if (currentHealth < previousHealth && currentHealth > 0)
-        {
-            if (audioManager != null)
-            {
-                audioManager.PlaySFX(audioManager.damage); // Play the damage sound
-            }
-        }
+    //    healthBar.SetHealth(currentHealth);
+    //    // Play damage sound only if the player lost health but is still alive
+    //    if (currentHealth < previousHealth && currentHealth > 0)
+    //    {
+    //        if (audioManager != null)
+    //        {
+    //            audioManager.PlaySFX(audioManager.damage); // Play the damage sound
+    //        }
+    //    }
 
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-            lifelineManager.LoseLife();
+        //if (currentHealth <= 0)
+        //{
+        //    currentHealth = 0;
+        //    lifelineManager.LoseLife();
 
             
 
-            if (lifelineManager.GetCurrentLives() > 0)
-            {
-                currentHealth = maxHealth;
-                healthBar.SetMaxHealth(maxHealth);
+        //    if (lifelineManager.GetCurrentLives() > 0)
+        //    {
+        //        currentHealth = maxHealth;
+        //        healthBar.SetMaxHealth(maxHealth);
 
-                // Play death sound when losing a lifeline
-                if (audioManager != null)
-                {
-                    audioManager.PlaySFX(audioManager.lostlife); // Play the death sound
-                }
-
-
-                RespawnAtCheckpoint();
-            }
-            else
-            {
-                isDead = true;
-                // Play game over sound when the player loses all lifelines
-                if (audioManager != null)
-                {
-                    audioManager.PlaySFX(audioManager.gameOver); // Play the game over sound
-                }
+        //        // Play death sound when losing a lifeline
+        //        if (audioManager != null)
+        //        {
+        //            audioManager.PlaySFX(audioManager.lostlife); // Play the death sound
+        //        }
 
 
+            // //   RespawnAtCheckpoint();
+            //}
+            //else
+            //{
+            //    isDead = true;
+            //    // Play game over sound when the player loses all lifelines
+            //    if (audioManager != null)
+            //    {
+            //        audioManager.PlaySFX(audioManager.gameOver); // Play the game over sound
+            //    }
 
-                // Handle player death (e.g., game over logic)
-                Debug.Log("Game Over!");
-                // Activate the Game Over Panel
-                if (gameOverPanel != null)
-                {
-                    gameOverPanel.SetActive(true);
-                }
 
-                // Pause the game
-                Time.timeScale = 0f;
-            }
-        }
-    }
-    private void RespawnAtCheckpoint()
-    {
+
+            //    // Handle player death (e.g., game over logic)
+            //    Debug.Log("Game Over!");
+            //    // Activate the Game Over Panel
+            //    if (gameOverPanel != null)
+            //    {
+            //        gameOverPanel.SetActive(true);
+            //    }
+
+            //    // Pause the game
+            //    Time.timeScale = 0f;
+            
+    //    }
+  //  }
+    //private void RespawnAtCheckpoint()
+   // {
         // Reset health and position
-        currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+     //   currentHealth = maxHealth;
+      //  healthBar.SetMaxHealth(maxHealth);
 
         // Move player to the last checkpoint
-        transform.position = CheckpointManager.Instance.GetLastCheckpointPosition();
-        Debug.Log("Player respawned at checkpoint!");
-    }
-
+      //  transform.position = CheckpointManager.Instance.GetLastCheckpointPosition();
+      //  Debug.Log("Player respawned at checkpoint!");
+   // }
+   
 }
