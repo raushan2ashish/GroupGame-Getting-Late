@@ -9,7 +9,7 @@ public class PlayerMovementControl : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     private bool isDead = false; 
-    public GameObject gameOverPanel;// Game Over Panel
+    //public GameObject gameOverPanel;// Game Over Panel
     
 
     // Movement Parameters
@@ -78,12 +78,6 @@ public class PlayerMovementControl : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = FindObjectOfType<AudioManager>();
-        }
-
-        // Ensure Game Over Panel is initially inactive
-        if (gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(false);
         }
     }
 

@@ -10,12 +10,26 @@ public class Health : MonoBehaviour
     public int health;
     public int MaxHealth;
     public int Lives;
+    public GameObject gameOverPanel;
+    public AudioManager audioManager;
 
     bool Vulnerable = true;
     // Start is called before the first frame update
     void Start()
     {
-       FindAnyObjectByType<LifelineManager>(); 
+       FindAnyObjectByType<LifelineManager>();
+        // Ensure Game Over Panel is initially inactive
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
+
+
+        // Ensure you have an AudioManager in the scene and it's assigned
+        if (audioManager == null)
+        {
+            audioManager = FindObjectOfType<AudioManager>();
+        }
     }
 
     // Update is called once per frame
@@ -25,6 +39,7 @@ public class Health : MonoBehaviour
         {
             RespawnAtCheckpoint();
             FindAnyObjectByType<LifelineManager>().LoseLife();
+            audioManager.PlaySFX(audioManager.lostlife);
             //Destroy(gameObject); //eventually this will be a respawn function
 
         }
@@ -40,8 +55,12 @@ public class Health : MonoBehaviour
         }
         if (Lives <= 0)
         {
-            SceneManager.LoadScene("level1");
-           //TEMPORARY!!!!!
+            // Activate the Game Over Panel
+             if (gameOverPanel != null)
+             {
+                gameOverPanel.SetActive(true);
+                audioManager.PlaySFX(audioManager.gameOver);
+            }
         }
     }
 
@@ -55,6 +74,7 @@ public class Health : MonoBehaviour
         {
             health = health - 1;
             Vulnerable = false;
+            audioManager.PlaySFX(audioManager.damage);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
