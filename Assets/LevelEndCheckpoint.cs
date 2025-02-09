@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class Checkpoint : MonoBehaviour
+public class LevelEndCheckpoint : MonoBehaviour
 {
     public GameObject checkpointPanel; // Reference to the checkpoint UI panel
     public Text timeText; // Reference to the UI text to display the time
@@ -38,7 +38,17 @@ public class Checkpoint : MonoBehaviour
         // Resume the game by setting time scale back to 1
         Time.timeScale = 1;
 
-        // Load the next level (change "Level2" to your scene name)
-        SceneManager.LoadScene("Level 2");
+        // Get current scene index
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // Load the next scene if it exists
+        if (currentSceneIndex + 1 < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(currentSceneIndex + 1);
+        }
+        else
+        {
+            Debug.Log("No more levels!"); // Optional: Show a UI message if last level is reached
+        }
     }
 }

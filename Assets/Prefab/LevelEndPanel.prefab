@@ -293,12 +293,12 @@ GameObject:
   - component: {fileID: 9041770227056325312}
   - component: {fileID: 912499758634619820}
   m_Layer: 5
-  m_Name: CheckpointPanel
+  m_Name: LevelEndPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5476219361611869709
 RectTransform:
   m_ObjectHideFlags: 0

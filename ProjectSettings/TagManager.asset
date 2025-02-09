@@ -16,11 +16,12 @@ TagManager:
   - LadderSwitch
   - LadderBreaker
   - EnemyTerritory
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ladder
   - Water
   - UI
   - Ground
