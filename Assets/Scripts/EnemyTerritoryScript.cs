@@ -8,11 +8,21 @@ public class EnemyTerritoryScript : MonoBehaviour
     
     [SerializeField] public GameObject enemyObj;
     [SerializeField] public float enemySpeed = 2.0f;
+    //public float enemyVerticalPos;
+    //public float enemyVerticalPosLock;
     public Vector2 enemyReturnCheck = new Vector2(1, 1);
     public bool enemyActive = false;
     
 
+    public void Start() 
+    {
+        //enemyVerticalPos = enemyObj.GetComponent<Rigidbody2D>().velocity.y;
+        //enemyVerticalPosLock = enemyVerticalPos;
+        //Debug.Log("is: " + enemyVerticalPos);
+    }
+
     // Makes enemy stop when it gets back to the starting point
+    // Locks enemy movement on y-axis
     void Update()
     {
         if((transform.position - enemyObj.transform.position).sqrMagnitude <= enemyReturnCheck.sqrMagnitude && enemyActive == false)
@@ -28,7 +38,7 @@ public class EnemyTerritoryScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             enemyActive = true;
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position) * enemySpeed;
+            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
         }
     }
 
@@ -37,7 +47,7 @@ public class EnemyTerritoryScript : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position) * enemySpeed;
+            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
         }
     }
 
@@ -47,12 +57,12 @@ public class EnemyTerritoryScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             enemyActive = false;
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position) * enemySpeed;
+            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
         }
         else if(other.gameObject.tag == "Hostile")
         {
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position) * enemySpeed;
-            enemyObj.transform.position = transform.position;
+            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            //enemyObj.transform.position = transform.position;
         }
     }
 }

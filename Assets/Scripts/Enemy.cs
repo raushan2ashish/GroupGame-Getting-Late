@@ -7,7 +7,9 @@ public class Enemy : MonoBehaviour
     
     public int health;
     public bool isActive;
-    public bool facingRight = true;
+    public bool isIdle = true;
+    public bool movingRight = false;
+    public bool facingRight = false;
     public Rigidbody2D rb;
     
 
@@ -25,11 +27,21 @@ public class Enemy : MonoBehaviour
         if(rb.velocity.x < 0)
         {
             facingRight = false;
+            isIdle = false;
+            AnimationFlipper();
         }
         else if(rb.velocity.x > 0)
         {
             facingRight = true;
+            isIdle = false;
+            AnimationFlipper();
         }
+        else if(rb.velocity.x == 0)
+        {
+            isIdle = true;
+        }
+
+        
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -47,9 +59,13 @@ public class Enemy : MonoBehaviour
 
     public void AnimationFlipper()
     {
-        Vector3 scaler = transform.localScale;
-        scaler.x *= -1;
-        transform.localScale = scaler;
+        if(movingRight != facingRight && isIdle == false)
+        {
+            movingRight = !movingRight;
+            Vector3 scaler = transform.localScale;
+            scaler.x *= -1;
+            transform.localScale = scaler;
+        }
     }
 
 }
