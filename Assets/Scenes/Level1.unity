@@ -4009,6 +4009,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 684120173}
     - target: {fileID: -3370006273676968281, guid: 641b0e7436f5caa43919732adc977510, type: 3}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 1527797293}
+    - target: {fileID: -3370006273676968281, guid: 641b0e7436f5caa43919732adc977510, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1580681348}
