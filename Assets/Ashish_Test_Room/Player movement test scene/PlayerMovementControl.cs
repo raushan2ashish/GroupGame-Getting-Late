@@ -207,11 +207,12 @@ public class PlayerMovementControl : MonoBehaviour
 
             // Detect enemies in range of the attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+          
 
             // Damage them
             foreach (Collider2D enemy in hitEnemies)
             {
-                enemy.GetComponent<Bardwire>().TakeDamage(attackDamage);
+                  enemy.GetComponent<EnemeyObsticaleHitMarker>().TakeDamage(attackDamage);
             }
 
             // Reset attack state after a short delay

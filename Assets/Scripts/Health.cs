@@ -72,9 +72,13 @@ public class Health : MonoBehaviour
     {
        if (Vulnerable == true && collision.gameObject.tag == "Damager" || collision.gameObject.tag == "Hostile") //eventually tags will need to be added to this so the player is only damaged when hitting enemies or obstacles 
         {
-            health = health - 1;
+            health = health - 10;
             Vulnerable = false;
             audioManager.PlaySFX(audioManager.damage);
+        }
+       if (collision.gameObject.tag == "InstantDeath")
+        {
+            health = 0;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

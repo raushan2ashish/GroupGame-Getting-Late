@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1728756617457410897}
   - component: {fileID: 2588831706707075299}
   - component: {fileID: 7834265228279709018}
+  - component: {fileID: -4919813254022665385}
   m_Layer: 7
   m_Name: bardwire
   m_TagString: Hostile
@@ -130,3 +131,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4919813254022665385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480361667193537714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61c1a07f82f2874da2a3e67a4a1491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 2

@@ -34,14 +34,14 @@ public class Bardwire : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
+    //public void TakeDamage(int damage)
+    //{
+    //    health -= damage;
+    //    if (health <= 0)
+    //    {
+    //        Die();
+    //    }
+    //}
 
     private void Die()
     {

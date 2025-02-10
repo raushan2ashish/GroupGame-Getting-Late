@@ -4007,7 +4007,7 @@ PrefabInstance:
     - target: {fileID: -3370006273676968281, guid: 641b0e7436f5caa43919732adc977510, type: 3}
       propertyPath: audioManager
       value: 
-      objectReference: {fileID: 8386934347775184407, guid: ce3363feb338dcc448fefdfe95098ac6, type: 3}
+      objectReference: {fileID: 684120173}
     - target: {fileID: -3370006273676968281, guid: 641b0e7436f5caa43919732adc977510, type: 3}
       propertyPath: gameOverPanel
       value: 
@@ -4230,6 +4230,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1552466896}
     m_Modifications:
+    - target: {fileID: -4919813254022665385, guid: 2312419d97c16ec4c8b11cdfd2454fa3, type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1728756617457410897, guid: 2312419d97c16ec4c8b11cdfd2454fa3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -170.37973
