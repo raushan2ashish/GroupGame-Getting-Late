@@ -10,6 +10,7 @@ public class Health : MonoBehaviour
     public int health;
     public int MaxHealth;
     public int Lives;
+    public Slider healthSlider;
     public GameObject gameOverPanel;
     public AudioManager audioManager;
 
@@ -29,6 +30,13 @@ public class Health : MonoBehaviour
         if (audioManager == null)
         {
             audioManager = FindObjectOfType<AudioManager>();
+        }
+
+        // the health slider
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = MaxHealth;
+            healthSlider.value = health;
         }
     }
 
@@ -61,6 +69,11 @@ public class Health : MonoBehaviour
                 gameOverPanel.SetActive(true);
                 audioManager.PlaySFX(audioManager.gameOver);
             }
+        }
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = health;
         }
     }
 
