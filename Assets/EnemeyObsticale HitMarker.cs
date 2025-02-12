@@ -24,5 +24,4 @@ public class EnemeyObsticaleHitMarker : MonoBehaviour
     {
         health -= 1;
     }
-
 }
