@@ -25,44 +25,56 @@ public class EnemyTerritoryScript : MonoBehaviour
     // Locks enemy movement on y-axis
     void Update()
     {
-        if((transform.position - enemyObj.transform.position).sqrMagnitude <= enemyReturnCheck.sqrMagnitude && enemyActive == false)
+        if (enemyObj != null)
         {
-            enemyObj.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            enemyObj.transform.position = transform.position;
+            if ((transform.position - enemyObj.transform.position).sqrMagnitude <= enemyReturnCheck.sqrMagnitude && enemyActive == false)
+            {
+                enemyObj.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                enemyObj.transform.position = transform.position;
+            }
         }
     }
 
     //Activates the enemy when player enters
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (enemyObj != null)
         {
-            enemyActive = true;
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            if (other.gameObject.tag == "Player")
+            {
+                enemyActive = true;
+                enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            }
         }
     }
 
     //Updates player position and enemy direction
     public void OnTriggerStay2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (enemyObj != null)
         {
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            if (other.gameObject.tag == "Player")
+            {
+                enemyObj.GetComponent<Rigidbody2D>().velocity = (other.transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            }
         }
     }
 
     //Returns enemy to starting point if player or enemy leaves territory
     public void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (enemyObj != null)
         {
-            enemyActive = false;
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
-        }
-        else if(other.gameObject.tag == "Hostile")
-        {
-            enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
-            //enemyObj.transform.position = transform.position;
+            if (other.gameObject.tag == "Player")
+            {
+                enemyActive = false;
+                enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
+            }
+            else if (other.gameObject.tag == "Hostile")
+            {
+                enemyObj.GetComponent<Rigidbody2D>().velocity = (transform.position - enemyObj.transform.position).normalized * enemySpeed;
+                //enemyObj.transform.position = transform.position;
+            }
         }
     }
 }

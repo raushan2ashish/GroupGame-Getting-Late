@@ -2305,6 +2305,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6175991147599067722, guid: bb8ea79a413b89f419f1d3e4c588fdc4, type: 3}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8383153475354005470, guid: bb8ea79a413b89f419f1d3e4c588fdc4, type: 3}
       propertyPath: m_Name
       value: SlimeTestEnemy Variant
