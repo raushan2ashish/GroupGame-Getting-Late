@@ -68,6 +68,7 @@ public class Health : MonoBehaviour
              {
                 gameOverPanel.SetActive(true);
                 audioManager.PlaySFX(audioManager.gameOver);
+                Time.timeScale = 0f;
             }
         }
 
