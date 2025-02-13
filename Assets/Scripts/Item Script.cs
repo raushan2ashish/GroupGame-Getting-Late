@@ -8,13 +8,11 @@ public class ItemScript : MonoBehaviour
     public bool Coin;
     public bool TimeReduction;
     public bool HealthUp;
-    public bool Colletcable;
     // Start is called before the first frame update
     void Start()
     {
         FindAnyObjectByType<Health>();
         FindAnyObjectByType<Timer>();
-        FindAnyObjectByType<CollectableSystem>();
     }
 
     // Update is called once per frame
@@ -41,11 +39,5 @@ public class ItemScript : MonoBehaviour
             FindAnyObjectByType<Health>().HealthBoost();
             FindAnyObjectByType<Scoreboard>().HealthPoint();
         }
-        if (Colletcable)
-        {
-            FindAnyObjectByType<CollectableSystem>().CollectableObtained();
-            FindAnyObjectByType<Scoreboard>().CollectPoint();
-        } 
-        
     }
 }

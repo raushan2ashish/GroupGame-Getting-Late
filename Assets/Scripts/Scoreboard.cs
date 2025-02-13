@@ -10,14 +10,13 @@ public class Scoreboard : MonoBehaviour
     public int CoinValue;
     public int TimeValue;
     public int HealthValue;
-    public int CollectableValue;
 
     public Text text;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -36,10 +35,6 @@ public class Scoreboard : MonoBehaviour
     }
     public void HealthPoint()
     {
-        Score = Score + HealthValue;
-    }
-    public void CollectPoint()
-    {
-        Score = Score + CollectableValue;
+        Score = Score + HealthValue;   
     }
 }
