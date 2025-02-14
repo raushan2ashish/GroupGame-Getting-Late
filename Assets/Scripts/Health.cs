@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public Slider healthSlider;
     public GameObject gameOverPanel;
     public AudioManager audioManager;
+    public PlayerMovementControl playerControl;
 
     bool Vulnerable = true;
     // Start is called before the first frame update
@@ -82,15 +83,22 @@ public class Health : MonoBehaviour
     {
         health = health + 2;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-       if (Vulnerable == true && collision.gameObject.tag == "Damager" || collision.gameObject.tag == "Hostile") //eventually tags will need to be added to this so the player is only damaged when hitting enemies or obstacles 
+        if (Vulnerable == true && collision.gameObject.tag == "Hostile") //eventually tags will need to be added to this so the player is only damaged when hitting enemies or obstacles 
         {
             health = health - 10;
             Vulnerable = false;
             audioManager.PlaySFX(audioManager.damage);
         }
-       if (collision.gameObject.tag == "InstantDeath")
+        else if (Vulnerable == true && collision.gameObject.tag == "Damager" && playerControl.isShielding == false)//Checks for shield and brick, necessary for shield to work
+        {
+            health = health - 10;
+            Vulnerable = false;
+            audioManager.PlaySFX(audioManager.damage);
+        }
+        
+        if (collision.gameObject.tag == "InstantDeath")
         {
             health = 0;
         }

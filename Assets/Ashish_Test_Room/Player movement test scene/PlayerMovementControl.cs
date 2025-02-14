@@ -46,7 +46,7 @@ public class PlayerMovementControl : MonoBehaviour
     private bool isGrounded;
     private float originalGravityScale;
     private bool isGliding = false;
-    private bool isShielding = false;
+    public bool isShielding = false;
 
     // Gizmo Controls
     public bool drawGizmos = true; // Enable/disable drawing Gizmos
@@ -192,7 +192,7 @@ public class PlayerMovementControl : MonoBehaviour
         }
     }
 
-    private void HandleShield()
+    public void HandleShield()
     {
         isShielding = Input.GetKey(KeyCode.H);
     }
