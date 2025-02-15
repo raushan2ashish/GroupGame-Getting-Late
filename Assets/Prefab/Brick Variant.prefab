@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4403272852064131001, guid: a282bc755813c02438d189343f13ac6e, type: 3}
+      propertyPath: m_SortingOrder
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4412732036175172618, guid: a282bc755813c02438d189343f13ac6e, type: 3}
       propertyPath: m_Name
       value: Brick Variant
